@@ -22,7 +22,6 @@ import com.leansoft.mxjc.util.ClassNameUtil;
 
 import freemarker.template.SimpleHash;
 
-
 /**
  * <h1>Nano Client Module</h1>
  * 

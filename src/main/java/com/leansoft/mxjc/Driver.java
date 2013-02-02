@@ -55,7 +55,7 @@ import org.xml.sax.SAXParseException;
 /**
  * CUI of XJC.
  * 
- * @author boyang, adapted from jaxb-xjc
+ * @author bulldog, adapted from jaxb-xjc
  */
 public class Driver {
 
@@ -521,12 +521,13 @@ public class Driver {
             System.out.println(Messages.format(Messages.DRIVER_PUBLIC_USAGE));
         }
         
-        if( opts!=null && opts.getAllPlugins().size()!=0 ) {
-            System.out.println(Messages.format(Messages.ADDON_USAGE));
-            for (Plugin p : opts.getAllPlugins()) {
-                System.out.println(p.getUsage());
-            }
-        }
+        // do not show plugin usage
+//        if( opts!=null && opts.getAllPlugins().size()!=0 ) {
+//            System.out.println(Messages.format(Messages.ADDON_USAGE));
+//            for (Plugin p : opts.getAllPlugins()) {
+//                System.out.println(p.getUsage());
+//            }
+//        }
     }
 }
 
