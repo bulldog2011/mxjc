@@ -12,7 +12,7 @@ xsd to android java compiler based on jaxb xjc.
 
 ###How to Use
 
-download latest release [here]((https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.0)
+download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.0)
 
 	Usage: mxjc [-options ...] <schema file/URL/dir> ... [-b <bindinfo>] ...  
 	If dir is specified, all schema files in it will be compiled.  
