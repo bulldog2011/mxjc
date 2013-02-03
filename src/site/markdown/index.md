@@ -32,6 +32,3 @@ download latest release [here]((https://github.com/bulldog2011/bulldog-repo/tree
 	    -quiet             :  suppress compiler output  
 	    -help              :  display this help message  
 	    -version           :  display version information  
-
-
-

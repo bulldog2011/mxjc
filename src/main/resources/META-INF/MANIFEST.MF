@@ -1,0 +1,6 @@
+Specification-Title: mxjc
+Specification-Version: 0.5
+Specification-Vendor: leansoft
+Implementation-Version: 0.5
+Implementation-Vendor: leansoft
+Implementation-Title: xsd to android java compiler based on jaxb xjc

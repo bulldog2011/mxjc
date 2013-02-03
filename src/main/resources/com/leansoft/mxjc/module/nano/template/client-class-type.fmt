@@ -17,9 +17,11 @@ import ${import};
 [#if clazz.rootElementAnnotation?? && clazz.rootElementAnnotation.parameterProvided]
 @${clazz.rootElementAnnotation}
 [/#if]
+[#--
 [#if clazz.xmlTypeAnnotation?? && clazz.xmlTypeAnnotation.parameterProvided]
 @${clazz.xmlTypeAnnotation}
 [/#if]
+--]
 public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superClass??]extends ${clazz.superClass.name} [#else] [/#if] {
 
     [#list clazz.fields as field]
