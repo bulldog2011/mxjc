@@ -5,7 +5,7 @@ xsd to android java compiler based on jaxb xjc.
 
 
 ###Feature Highlight
-1. ***Standard & Mature*** : based on Oracle JAXB 2.1 XJC, recognize most standard Xml schema or WSDL components.
+1. ***Standard based*** : based on Oracle JAXB 2.1 XJC, recognize most standard Xml schema or WSDL components.
 2. ***Nano Binding Support*** : auto-generate Nano for Android bindable classes from Xml schema or WSDL.
 3. ***Doc Auto Generation*** : auto-generate code documents from Xml schema or WSDL.
 
@@ -19,7 +19,7 @@ download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/
 	Options:  
 	    -nv                :  do not perform strict validation of the input schema(s)  
 	    -b <file/dir>      :  specify external bindings files (each <file> must have its own -b)  
-	                                               If a directory is given, **/*.xjb is searched  
+                              If a directory is given, **/*.xjb is searched  
 	    -d <dir>           :  generated files will go into this directory  
 	    -p <pkg>           :  specifies the target package  
 	    -httpproxy <proxy> :  set HTTP/HTTPS proxy. Format is [user[:password]@]proxyHost:proxyPort  
@@ -32,6 +32,11 @@ download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/
 	    -quiet             :  suppress compiler output  
 	    -help              :  display this help message  
 	    -version           :  display version information  
+
+
+###Current Limition
+1. xsd:any is not supported
+2. xsd:choice is not support
 
 
 
