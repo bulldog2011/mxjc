@@ -182,7 +182,7 @@ public class ClassModelBuilder {
 						attrInfo.setElementAnnotation(getElementAnnotation(co, cProp, t));
 					} else {
 						if (errorReceiver != null) {
-							errorReceiver.warning(null, "found xsd choice which is not supported yet");
+							errorReceiver.warning(ep.locator, "found xsd choice which is not supported yet");
 						}
 					}
 				} else if (cProp instanceof CAttributePropertyInfo) {

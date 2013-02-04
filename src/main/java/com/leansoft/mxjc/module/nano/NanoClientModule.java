@@ -55,7 +55,6 @@ public class NanoClientModule extends AbstractClientModule {
 				"java.util.Date");
 		typeMapping.put(javax.xml.datatype.Duration.class.getName(),
 				"com.leansoft.nano.custom.types.Duration");
-		
 	}
 	
 	private void loadTemplates() throws XjcModuleException {
@@ -126,6 +125,20 @@ public class NanoClientModule extends AbstractClientModule {
 		if (targetTypeFullName != null) {
 			type.setFullName(targetTypeFullName);
 			type.setName(ClassNameUtil.stripQualifier(targetTypeFullName));			
+		} else {
+			if (type.isCollection()) { // special handling for collection type
+				for(String oldTypeFullName : typeMapping.keySet()) {
+					if (type.getFullName().indexOf(oldTypeFullName) > 0) { // including type parameter?
+						String newTypeFullName = typeMapping.get(oldTypeFullName);
+						String newFullName = type.getFullName().replace(oldTypeFullName, newTypeFullName);
+						String oldSimpleName = ClassNameUtil.stripQualifier(oldTypeFullName);
+						String newSimpleName = ClassNameUtil.stripQualifier(newTypeFullName);
+						String newName = type.getName().replace(oldSimpleName, newSimpleName);
+						type.setFullName(newFullName);
+						type.setName(newName);
+					}
+				}
+			}
 		}
 	}
 	

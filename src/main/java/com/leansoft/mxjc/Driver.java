@@ -43,7 +43,6 @@ import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.XJCListener;
 import com.sun.tools.xjc.ConsoleErrorReporter;
 import com.sun.tools.xjc.Language;
-import com.sun.tools.xjc.Plugin;
 import com.sun.xml.xsom.XSComplexType;
 import com.sun.xml.xsom.XSParticle;
 import com.sun.xml.xsom.XSSchemaSet;

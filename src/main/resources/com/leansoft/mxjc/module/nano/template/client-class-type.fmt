@@ -4,6 +4,7 @@
 // DO NOT CHANGE!
 package ${clazz.packageName};
 
+import java.io.Serializable
 import com.leansoft.nano.annotation.*;
 [#list imports as import]
 import ${import};
@@ -22,9 +23,12 @@ import ${import};
 @${clazz.xmlTypeAnnotation}
 [/#if]
 --]
-public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superClass??]extends ${clazz.superClass.name} [#else] [/#if] {
+public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superClass??]extends ${clazz.superClass.name} [/#if]implements Serializable {
+
+    private static final long serialVersionUID = -1L;
 
     [#list clazz.fields as field]
+	[#if !field.any]  
 	[#if field.attribute][#-- map to xml attribute --]
 	  [#if field.attributeAnnotation?? && field.attributeAnnotation.parameterProvided]
 	@${field.attributeAnnotation}
@@ -39,12 +43,14 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	  [/#if]
 	[#elseif field.value][#-- map to xml value --]
 	@Value
-	[/#if]    
+	[/#if]  
 	private ${field.type.name} ${field.name};
-    
+	[/#if]
+	
     [/#list]
     
     [#list clazz.fields as field]
+    [#if !field.any]  
     [#if field.docComment??]
 	/**
      * public getter
@@ -82,6 +88,7 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	public void set${field.name?cap_first}(${field.type.name} ${field.name}) {
 	    this.${field.name} = ${field.name};
 	}
+	[/#if]
 	[/#list]
 
 }
