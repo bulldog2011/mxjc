@@ -171,6 +171,7 @@ public class ClassModelBuilder {
 					attrInfo.setValue(true);
 				} else if (cProp.kind() == PropertyKind.REFERENCE) {
 					attrInfo.setAny(true);
+					continue; // ignore any
 				}
 				
 				// Annotation

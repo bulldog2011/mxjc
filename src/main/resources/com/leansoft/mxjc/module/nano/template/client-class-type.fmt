@@ -4,7 +4,7 @@
 // DO NOT CHANGE!
 package ${clazz.packageName};
 
-import java.io.Serializable
+import java.io.Serializable;
 import com.leansoft.nano.annotation.*;
 [#list imports as import]
 import ${import};
