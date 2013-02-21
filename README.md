@@ -1,18 +1,18 @@
 mxjc
 ====
 
-xsd to android java compiler based on jaxb xjc.
+xsd to android java binding compiler based on jaxb xjc.
 
 
 ###Feature Highlight
-1. ***Standard based*** : based on Oracle JAXB 2.1 XJC, recognize most standard Xml schema or WSDL components.
-2. ***Nano Binding Support*** : auto-generate Nano for Android bindable classes from Xml schema or WSDL.
-3. ***Doc Auto Generation*** : auto-generate code documents from Xml schema or WSDL.
+1. ***Standard based*** : based on Oracle JAXB 2.1 XJC, recognize most standard XML Schema components.
+2. ***Nano Binding Support*** : auto-generate Nano for Android bindable classes from XML Schema or WSDL.
+3. ***Doc Auto Generation*** : auto-generate code comments from XML Schema or WSDL annotations.
 
 
 ###How to Use
 
-download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.0)
+download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.1)
 
 	Usage: mxjc [-options ...] <schema file/URL/dir> ... [-b <bindinfo>] ...  
 	If dir is specified, all schema files in it will be compiled.  
@@ -33,10 +33,24 @@ download latest release [here](https://github.com/bulldog2011/bulldog-repo/tree/
 	    -help              :  display this help message  
 	    -version           :  display version information  
 
+###Docs
+1. [Scheam driven data binding with Nano and mxjc](http://bulldog2011.github.com/blog/2013/02/07/schema-driven-nano-binding/)
+2. [Schema Driven Web Serivce Client Development on Android, Part 1 : Hello eBay Finding](http://bulldog2011.github.com/blog/2013/02/17/schema-driven-on-android-part-1-hello-ebay-finding/)
+3. [Schema Driven Web Serivce Client Development on Android, Part 2 : eBay Search App](http://bulldog2011.github.com/blog/2013/02/19/schema-driven-on-android-part-2-ebay-search/)
+
 
 ###Current Limition
-1. xsd:any is not supported
-2. xsd:choice is not support
+1. xsd:any is not supported and will be ignored if presents
+2. xsd:choice is not support and will be ignored if presents
+
+###Copyright and License
+Copyright 2012 LeanSoft, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 
 
