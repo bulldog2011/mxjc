@@ -6,7 +6,8 @@ xsd to android java binding compiler based on jaxb xjc.
 
 ###Feature Highlight
 1. ***Standard based*** : based on Oracle JAXB 2.1 XJC, recognize most standard XML Schema components.
-2. ***Nano Binding Support*** : auto-generate Nano for Android bindable classes from XML Schema or WSDL.
+2. ***Android Nano Binding Support*** : auto-generate Nano for Android bindable classes from XML Schema or WSDL.
+3. ***Objective-c Pico Binding Support*** : ongoing.
 3. ***Doc Auto Generation*** : auto-generate code comments from XML Schema or WSDL annotations.
 
 
