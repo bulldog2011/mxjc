@@ -1,10 +1,10 @@
-package com.leansoft.mxjc.model.nano;
+package com.leansoft.mxjc.model.annotation;
 
 import com.leansoft.mxjc.model.Annotatable;
 import com.leansoft.mxjc.util.StringUtil;
 
-public class RootElementAnnotation implements Annotatable {
-	
+public class XmlTypeAnnotation implements Annotatable {
+
 	private String name = "";
 	private String namespace = "";
 
@@ -45,8 +45,9 @@ public class RootElementAnnotation implements Annotatable {
 			}
 			value += "namespace = \"" + namespace + "\"";;
 		}
-		value = "RootElement(" + value + ")";
+		value = "XmlType(" + value + ")";
 		return value;
 	}
+
 
 }

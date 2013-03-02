@@ -1,4 +1,4 @@
-package com.leansoft.mxjc.model.nano;
+package com.leansoft.mxjc.model.annotation;
 
 import com.leansoft.mxjc.model.Annotatable;
 import com.leansoft.mxjc.util.StringUtil;

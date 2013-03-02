@@ -1,4 +1,4 @@
-package com.leansoft.mxjc.model.nano;
+package com.leansoft.mxjc.model.annotation;
 
 public class ValueAnnotation {
 

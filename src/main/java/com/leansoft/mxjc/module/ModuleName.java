@@ -3,8 +3,8 @@ package com.leansoft.mxjc.module;
 public enum ModuleName {
 
 	NANO("nano"),  // android java
-	MICRO("micro"), // ios objective-c
-	PICO("pico");  // php
+	MICRO("micro"), // php
+	PICO("pico");  // ios objective-c
 	
 	private final String name;
 	

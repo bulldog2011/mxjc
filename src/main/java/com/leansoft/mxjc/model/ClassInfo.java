@@ -3,8 +3,8 @@ package com.leansoft.mxjc.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.leansoft.mxjc.model.nano.RootElementAnnotation;
-import com.leansoft.mxjc.model.nano.XmlTypeAnnotation;
+import com.leansoft.mxjc.model.annotation.RootElementAnnotation;
+import com.leansoft.mxjc.model.annotation.XmlTypeAnnotation;
 
 /**
  * Class model for codegen

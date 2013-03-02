@@ -2,6 +2,7 @@ package com.leansoft.mxjc.module;
 
 import java.util.Set;
 
+import com.leansoft.mxjc.model.CGConfig;
 import com.leansoft.mxjc.model.CGModel;
 import com.leansoft.mxjc.model.FileInfo;
 import com.sun.tools.xjc.ErrorReceiver;
@@ -41,8 +42,9 @@ public interface ClientModule {
 	 * Generate target code according to platform specific logic
 	 * 
 	 * @param context, code generation model
+	 * @param config, config for code generation
 	 * @return a set of generated file model
 	 * @throws XjcModuleException
 	 */
-	public Set<FileInfo> generate(CGModel cgModel) throws XjcModuleException;
+	public Set<FileInfo> generate(CGModel cgModel, CGConfig config) throws XjcModuleException;
 }

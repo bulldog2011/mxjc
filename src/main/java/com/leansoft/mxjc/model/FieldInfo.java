@@ -1,7 +1,7 @@
 package com.leansoft.mxjc.model;
 
-import com.leansoft.mxjc.model.nano.AttributeAnnotation;
-import com.leansoft.mxjc.model.nano.ElementAnnotation;
+import com.leansoft.mxjc.model.annotation.AttributeAnnotation;
+import com.leansoft.mxjc.model.annotation.ElementAnnotation;
 
 /**
  * Field model for codegen

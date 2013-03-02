@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.leansoft.mxjc.builder.ModelBuilder;
+import com.leansoft.mxjc.model.CGConfig;
 import com.leansoft.mxjc.model.CGModel;
 import com.leansoft.mxjc.model.FileInfo;
 import com.leansoft.mxjc.module.ClientModule;
@@ -356,7 +357,7 @@ public class Driver {
                         clientModule.setErrorReceiver(receiver);// enable reporting
                         clientModule.init();
                         
-						files = clientModule.generate(cgModel);
+						files = clientModule.generate(cgModel, new CGConfig()); // TODO, code gen config
 					} catch (XjcModuleException e1) {
 						receiver.error(e1);
 						return -1;

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.leansoft.mxjc.model.CGConfig;
 import com.leansoft.mxjc.model.CGModel;
 import com.leansoft.mxjc.model.ClassInfo;
 import com.leansoft.mxjc.model.EnumInfo;
@@ -46,7 +47,7 @@ public class NanoClientModule extends AbstractClientModule {
 
 	@Override
 	public void init() throws XjcModuleException {
-		info("Loading templates ...");
+		info("NanoClientModule loading templates ...");
 		loadTemplates();
 		
 		// some custom type mappings
@@ -63,7 +64,7 @@ public class NanoClientModule extends AbstractClientModule {
 	}
 
 	@Override
-	public Set<FileInfo> generate(CGModel cgModel) throws XjcModuleException {
+	public Set<FileInfo> generate(CGModel cgModel, CGConfig config) throws XjcModuleException {
 		// freemarker datamodel
 		SimpleHash fmModel = this.getFreemarkerModel();
 		
@@ -277,7 +278,7 @@ public class NanoClientModule extends AbstractClientModule {
 			throw new XjcModuleException("Fail to load required template file : "
 					+ template);
 		}
-		debug("AndroidClientModule get template : " + url.toString());
+		debug("NanoClientModule get template : " + url.toString());
 		return url;
 	}
 

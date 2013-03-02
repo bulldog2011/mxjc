@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.leansoft.mxjc.builder.ModelBuilder;
+import com.leansoft.mxjc.model.CGConfig;
 import com.leansoft.mxjc.model.CGModel;
 import com.leansoft.mxjc.model.FileInfo;
 import com.leansoft.mxjc.module.ClientModule;
@@ -497,7 +498,7 @@ public class MXJC2Task extends Task {
                 clientModule.setErrorReceiver(errorReceiver);// enable reporting
                 clientModule.init();
                 
-				files = clientModule.generate(cgModel);
+				files = clientModule.generate(cgModel, new CGConfig()); // TODO code gen config
 			} catch (XjcModuleException e1) {
 				throw new BuildException("failed to generate target module code", e1);
 			}
