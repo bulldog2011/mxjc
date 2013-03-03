@@ -122,6 +122,12 @@ public abstract class AbstractClientModule implements ClientModule {
 		}
 	}
 	
+	protected void warn(String msg) {
+		if (this.errorReceiver != null) {
+			this.errorReceiver.warning(null, msg);
+		}
+	}
+	
 	/**
 	 * error level report
 	 * 

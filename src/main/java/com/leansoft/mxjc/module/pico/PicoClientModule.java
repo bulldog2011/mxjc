@@ -14,12 +14,13 @@ import com.leansoft.mxjc.model.TypeInfo;
 import com.leansoft.mxjc.module.AbstractClientModule;
 import com.leansoft.mxjc.module.ModuleName;
 import com.leansoft.mxjc.module.XjcModuleException;
-import com.leansoft.mxjc.module.nano.NanoClientModule;
 import com.leansoft.mxjc.util.ClassNameUtil;
 
 import freemarker.template.SimpleHash;
 
 public class PicoClientModule extends AbstractClientModule {
+	
+	static final String ANY_IMPORT = "GDataXMLNode";
 	
 	// references to templates
 	private URL clzIntfTemplate;
@@ -45,7 +46,7 @@ public class PicoClientModule extends AbstractClientModule {
 		clzImplTempalte = this.getTemplateURL("client-class-implementation.fmt");
 		enumDeclarationTemplate = this.getTemplateURL("client-enum-declaration.fmt");
 		enumDefinitionTemplate = this.getTemplateURL("client-enum-definition.fmt");
-		commonHeaderTemplate = this.getTemplateURL("client_common_header.fmt");
+		commonHeaderTemplate = this.getTemplateURL("client-common-header.fmt");
 	}
 
 	@Override
@@ -57,13 +58,13 @@ public class PicoClientModule extends AbstractClientModule {
 		// container for target codes
 		Set<FileInfo> targetFileSet = new HashSet<FileInfo>();
 		
-		if (config.picoPrefix == null) {
-			throw new XjcModuleException("Prefix is missing, for pico client module, prefix is mandatory!");
-		}
-		
 		info("Generating the Pico client classes...");
 		
-		prefixType(cgModel, config.picoPrefix);
+		if (config.picoPrefix == null) {
+			warn("No prefix is provided, it's recommended to add prefix for Pico binding to avoid possible conflict");
+		}
+		String prefix = config.picoPrefix == null ? "" : config.picoPrefix;
+		prefixType(cgModel, prefix);
 		
 		fmModel.put("group", config.picoServiceGroup);
 		
@@ -74,6 +75,7 @@ public class PicoClientModule extends AbstractClientModule {
 			fmModel.put("superClassImports", this.getSuperClassImports(classInfo));
 			fmModel.put("fieldClassImports", this.getFieldImports(classInfo));
 			fmModel.put("clazz", classInfo);
+			fmModel.put("hasAny", this.hasAny(classInfo));
 			
 			String relativePath = ClassNameUtil.packageNameToPath(classInfo.getPackageName());
 			FileInfo classIntf = this.generateFile(clzIntfTemplate, fmModel, classInfo.getName(), "h", relativePath);
@@ -97,7 +99,7 @@ public class PicoClientModule extends AbstractClientModule {
 		info("Generating common header ...");
 		fmModel.put("classes", cgModel.getClasses());
 		fmModel.put("enums", cgModel.getEnums());
-		String commonTypeFileName = config.picoServiceGroup != null ? config.picoServiceGroup + "CommonTypes" : "CommonTypes";
+		String commonTypeFileName = prefix + "CommonTypes";
 		FileInfo commonHeader = this.generateFile(commonHeaderTemplate, fmModel, commonTypeFileName, "h", "");
 		targetFileSet.add(commonHeader);
 		
@@ -151,8 +153,9 @@ public class PicoClientModule extends AbstractClientModule {
 		if (Java2PicoTypeMapper.lookupPicoType(type.getFullName()) != null) {
 			return;
 		}
-		type.setName(prefix + type.getName());
-		type.setFullName(prefix + type.getName());
+		String name = type.getName();
+		type.setName(prefix + name);
+		type.setFullName(prefix + name);
 	}
 	
 	private Set<String> getSuperClassImports(ClassInfo clazz) {
@@ -193,6 +196,14 @@ public class PicoClientModule extends AbstractClientModule {
 		return imports;
 	}
 	
+	private boolean hasAny(ClassInfo clazz) {
+		for(FieldInfo field : clazz.getFields()) {
+			TypeInfo fieldType = field.getType();
+			if (field.isAny()) return true;
+		}
+		return false;
+	}
+	
 	private void convertFieldsType(ClassInfo clazz) {
 		for (FieldInfo field : clazz.getFields()) {
 			TypeInfo fieldType = field.getType();
@@ -231,7 +242,7 @@ public class PicoClientModule extends AbstractClientModule {
 
 	@Override
 	protected URL getTemplateURL(String template) throws XjcModuleException {
-		URL url = NanoClientModule.class.getResource("template/" + template);
+		URL url = PicoClientModule.class.getResource("template/" + template);
 		if (url == null) {
 			throw new XjcModuleException("Fail to load required template file : "
 					+ template);

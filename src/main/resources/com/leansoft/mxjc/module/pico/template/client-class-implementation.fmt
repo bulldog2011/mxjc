@@ -4,17 +4,18 @@
 // DO NOT CHANGE!
 
 #import <Foundation/Foundation.h>
-#import "${clazz.name}.h";
+#import "${clazz.name}.h"
 [#list fieldClassImports as import]
 #import "${import}.h"
 [/#list]
+[#if hasAny]
+#import "GDataXMLNode.h
+[/#if]
 
 @implementation ${clazz.name}
 
 [#list clazz.fields as field]
-  [#if !field.any]
 @synthesize ${field.name} = _${field.name};
-  [/#if]
 [/#list]
 
 // class meta-data method
@@ -51,7 +52,7 @@
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
 	[#elseif field.element][#-- map to xml element --]
-	    [#if field.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
+	    [#if field.type.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
 		[#assign type = field.type.typeParameters?first]
 	  [#if !flag]
 	     [#assign flag=true]
@@ -74,7 +75,20 @@
 	     [#assign flag=true]
     PicoPropertySchema *ps = nil;
 	  [/#if]
-    ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_TEXT xmlName:nil propertyName:@"${field.name}" type:${field.type.name} clazz:[#if !field.type.primitive][${field.type.fullName} class][#else]nil[/#if]];
+    ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_VALUE xmlName:nil propertyName:@"${field.name}" type:${field.type.name} clazz:[#if !field.type.primitive][${field.type.fullName} class][#else]nil[/#if]];
+    [map setObject:ps forKey:@"${field.name}"];
+    [ps release];
+    [#else][#-- map to xml any --]
+      [#if !flag]
+	     [#assign flag=true]
+    PicoPropertySchema *ps = nil;
+	  [/#if]
+	  [#if field.type.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
+	  [#assign type = field.type.typeParameters?first]
+	  [#else]
+	  [#assign type = field.type]
+	  [/#if]
+    ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ANYELEMENT xmlName:nil propertyName:@"${field.name}" type:${type.name} clazz:[#if !type.primitive][${type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
 	[/#if]                     
@@ -87,9 +101,7 @@
 
 -(void)dealloc {
 [#list clazz.fields as field]
-  [#if !field.any]
     self.${field.name} = nil;
-  [/#if]
 [/#list]
     [super dealloc];
 }

@@ -353,11 +353,13 @@ public class Driver {
                     Set<FileInfo> files;
                     try {
                         // TODO, try one first
-                        ClientModule clientModule = ModuleFactory.getModule(ModuleName.NANO);
+                        ClientModule clientModule = ModuleFactory.getModule(opt.module);
                         clientModule.setErrorReceiver(receiver);// enable reporting
                         clientModule.init();
                         
-						files = clientModule.generate(cgModel, new CGConfig()); // TODO, code gen config
+                        CGConfig cgConfig = new CGConfig();
+                        cgConfig.picoPrefix = opt.prefix;
+						files = clientModule.generate(cgModel, cgConfig);
 					} catch (XjcModuleException e1) {
 						receiver.error(e1);
 						return -1;
@@ -464,6 +466,10 @@ public class Driver {
         /** A switch that determines the behavior in the BGM mode. */
         public boolean noNS = false;
         
+        public ModuleName module = ModuleName.NANO;
+        
+        public String prefix;
+               
         /** Parse XJC-specific options. */
         public int parseArgument(String[] args, int i) throws BadCommandLineException {
             if (args[i].equals("-noNS")) {
@@ -488,6 +494,22 @@ public class Driver {
                 throw new BadCommandLineException(
                     Messages.format(Messages.UNRECOGNIZED_MODE, args[i]));
             }
+            
+            if (args[i].equals("-nano")) {
+            	module = ModuleName.NANO;
+            	return 1;
+            }
+            
+            if (args[i].equals("-pico")) {
+            	module = ModuleName.PICO;
+            	return 1;
+            }
+            
+            if (args[i].equals("-prefix")) {
+            	prefix = super.requireArgument("-prefix", args, ++i);
+            	return 2;
+            }
+            
             if (args[i].equals("-help")) {
                 usage(this,false);
                 throw new WeAreDone();

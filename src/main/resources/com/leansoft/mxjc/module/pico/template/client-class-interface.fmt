@@ -19,6 +19,9 @@
 [#list fieldClassImports as import]
 @class ${import};
 [/#list]
+[#if hasAny]
+@class GDataXMLElement;
+[/#if]
 
 /**
  ${clazz.docComment?default("(public class)")?replace("\n", "\n ")?replace("\t", "")}
@@ -31,9 +34,12 @@
 
 @private
 [#list clazz.fields as field]
-[#if field.collection]
+[#if field.type.collection]
   [#if !field.any]
     NSMutableArray *_${field.name};
+  [#else]
+    [#assign type = field.type.typeParameters?first]
+    ${type.fullName} *_${field.name};
   [/#if]
 [#elseif field.type.enum]
     NSString *_${field.name};
@@ -50,8 +56,7 @@
 [/#function]
 
 [#list clazz.fields as field]
-[#if field.collection]
-  [#if !field.any]
+[#if field.type.collection]
   	[#assign type = field.type.typeParameters?first]
 /**
  ${field.docComment?default("(public property)")?replace("\n", "\n ")?replace("\t", "")}
@@ -64,7 +69,10 @@
  entry type : class ${type.fullName}
  [/#if]
 */
+  [#if !field.any]
 @property (nonatomic, retain) NSMutableArray *${field.name};
+  [#else]
+@property (nonatomic, retain) ${type.fullName} *${field.name};
   [/#if]
 [#elseif field.type.enum]
 /**

@@ -33,7 +33,7 @@ public class PicoTypeMapper {
 		mapping.put(PicoType.DURATION, OCWrapper.NSSTRING);
 		mapping.put(PicoType.STRING, OCWrapper.NSSTRING);
 		mapping.put(PicoType.DATA, OCWrapper.NSDATA);
-		mapping.put(PicoType.QNAME, OCWrapper.PICO_QNAME);
+		mapping.put(PicoType.QNAME, OCWrapper.NSSTRING);
 		mapping.put(PicoType.ANYELEMENT, OCWrapper.PICO_ANYELEMENT);
 	}
 	
