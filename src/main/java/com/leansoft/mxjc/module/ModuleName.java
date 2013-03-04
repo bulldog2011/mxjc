@@ -16,4 +16,15 @@ public enum ModuleName {
 		return name;
 	}
 	
+	public static ModuleName fromString(String value) {
+		if (value != null) {
+			for(ModuleName moduleName : ModuleName.values()) {
+				if (value.equalsIgnoreCase(moduleName.name)) {
+					return moduleName;
+				}
+			}
+		}
+		return null;
+	}
+	
 }

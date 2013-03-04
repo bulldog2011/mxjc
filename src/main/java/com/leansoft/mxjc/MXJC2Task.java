@@ -64,6 +64,9 @@ public class MXJC2Task extends Task {
     }
 
     public final Options options = new Options();
+    // mxjc specific options
+    private ModuleName moduleName = ModuleName.NANO; // default to nano binding
+    private String prefix;
     
     /** User-specified stack size. */
     private long stackSize = -1;
@@ -159,6 +162,30 @@ public class MXJC2Task extends Task {
             EditDistance.findNearest(language.toUpperCase(),candidates)+" ?");
         }
         options.setSchemaLanguage(l);
+    }
+    
+    /**
+     * Set target module name
+     */
+    public void setModule(String name) {
+    	ModuleName moduleName = ModuleName.fromString(name);
+    	if (moduleName == null) {
+    		ModuleName[] moduleNames = ModuleName.values();
+    		String[] candidates = new String[moduleNames.length];
+    		for(int i = 0; i < candidates.length; i++) {
+    			candidates[i] = moduleNames[i].toString();
+    		}
+            throw new BuildException("Unrecognized module name: "+name+". Did you mean "+
+            EditDistance.findNearest(name.toLowerCase(), candidates)+" ?");
+    	}
+    	this.moduleName = moduleName;
+    }
+    
+    /**
+     * Set prefix, only for pico binding
+     */
+    public void setPrefix(String prefix) {
+    	this.prefix = prefix;
     }
     
     /**
@@ -493,12 +520,13 @@ public class MXJC2Task extends Task {
             // use specific client module to generate code
             Set<FileInfo> files;
             try {
-                // TODO, try one first
-                ClientModule clientModule = ModuleFactory.getModule(ModuleName.NANO);
+                ClientModule clientModule = ModuleFactory.getModule(moduleName);
                 clientModule.setErrorReceiver(errorReceiver);// enable reporting
                 clientModule.init();
                 
-				files = clientModule.generate(cgModel, new CGConfig()); // TODO code gen config
+                CGConfig cgConfig = new CGConfig();
+                cgConfig.picoPrefix = this.prefix;
+				files = clientModule.generate(cgModel, cgConfig);
 			} catch (XjcModuleException e1) {
 				throw new BuildException("failed to generate target module code", e1);
 			}

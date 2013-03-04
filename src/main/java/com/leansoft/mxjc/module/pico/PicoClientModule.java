@@ -75,7 +75,7 @@ public class PicoClientModule extends AbstractClientModule {
 			fmModel.put("superClassImports", this.getSuperClassImports(classInfo));
 			fmModel.put("fieldClassImports", this.getFieldImports(classInfo));
 			fmModel.put("clazz", classInfo);
-			fmModel.put("hasAny", this.hasAny(classInfo));
+			fmModel.put("hasAny", this.hasAny(classInfo)); // for GDataXML import
 			
 			String relativePath = ClassNameUtil.packageNameToPath(classInfo.getPackageName());
 			FileInfo classIntf = this.generateFile(clzIntfTemplate, fmModel, classInfo.getName(), "h", relativePath);
@@ -155,7 +155,7 @@ public class PicoClientModule extends AbstractClientModule {
 		}
 		String name = type.getName();
 		type.setName(prefix + name);
-		type.setFullName(prefix + name);
+		type.setFullName(prefix + name); // remove package for pico
 	}
 	
 	private Set<String> getSuperClassImports(ClassInfo clazz) {
@@ -198,7 +198,6 @@ public class PicoClientModule extends AbstractClientModule {
 	
 	private boolean hasAny(ClassInfo clazz) {
 		for(FieldInfo field : clazz.getFields()) {
-			TypeInfo fieldType = field.getType();
 			if (field.isAny()) return true;
 		}
 		return false;
@@ -235,8 +234,8 @@ public class PicoClientModule extends AbstractClientModule {
 			type.setName(PicoType.ENUM); // pico enum type
 			type.setPrimitive(true); // treat enum as primitive type
 		} else {
-			type.setPrimitive(false);
 			type.setName(PicoType.OBJECT);
+			type.setPrimitive(false);
 		}
 	}
 

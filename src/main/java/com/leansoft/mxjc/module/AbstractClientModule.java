@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
 import org.xml.sax.Locator;
+import org.xml.sax.helpers.LocatorImpl;
 
 import com.leansoft.mxjc.model.FileInfo;
 import com.sun.tools.xjc.ErrorReceiver;
@@ -118,13 +119,19 @@ public abstract class AbstractClientModule implements ClientModule {
 	 */
 	protected void error(String msg) {
 		if (this.errorReceiver != null) {
-			this.errorReceiver.error(null, msg);
+			LocatorImpl locator = new LocatorImpl();
+			locator.setLineNumber(-1);
+			locator.setSystemId("module : " + this.getName().toString());
+			this.errorReceiver.error(locator, msg);
 		}
 	}
 	
 	protected void warn(String msg) {
 		if (this.errorReceiver != null) {
-			this.errorReceiver.warning(null, msg);
+			LocatorImpl locator = new LocatorImpl();
+			locator.setLineNumber(-1);
+			locator.setSystemId("module : " + this.getName().toString());
+			this.errorReceiver.warning(locator, msg);
 		}
 	}
 	

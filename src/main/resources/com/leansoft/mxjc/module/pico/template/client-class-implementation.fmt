@@ -21,27 +21,28 @@
 // class meta-data method
 // note: this method is only for internal use, DO NOT CHANGE!
 +(PicoClassSchema *)getClassMetaData {
-
-    PicoClassSchema *cs = nil;
 [#if clazz.rootElementAnnotation?? && clazz.rootElementAnnotation.parameterProvided]
+    PicoClassSchema *cs = nil;
     [[PicoClassSchema alloc] initWithXmlName:@"${clazz.rootElementAnnotation.name}" nsUri:@"${clazz.rootElementAnnotation.namespace}"];
     [cs autorelease];
-[/#if]
     return cs;
+[#else]
+    return nil;
+[/#if]
 }
+
 // property meta-data method
 // note: this method is only for internal use, DO NOT CHANGE!
 +(NSMutableDictionary *)getPropertyMetaData {
     NSMutableDictionary *map = [NSMutableDictionary dictionary];
-    
     [#assign flag=false]
     
-    [#list clazz.fields as field]
+[#list clazz.fields as field]
     [#assign xmlName = field.name]
     [#if field.elementAnnotation?? && field.elementAnnotation.parameterProvided]
-	[#assign xmlName = field.elementAnnotation.name]
+	  [#assign xmlName = field.elementAnnotation.name]
 	[#elseif field.attributeAnnotation?? && field.attributeAnnotation.parameterProvided]
-	[#assign xmlName = field.attributeAnnotation.name]
+	  [#assign xmlName = field.attributeAnnotation.name]
 	[/#if]
 	[#if field.attribute][#-- map to xml attribute --]
 	  [#if !flag]
@@ -53,46 +54,46 @@
     [ps release];
 	[#elseif field.element][#-- map to xml element --]
 	    [#if field.type.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
-		[#assign type = field.type.typeParameters?first]
-	  [#if !flag]
-	     [#assign flag=true]
+		    [#assign type = field.type.typeParameters?first]
+	        [#if !flag]
+	            [#assign flag=true]
     PicoPropertySchema *ps = nil;
-	  [/#if]
+	        [/#if]
     ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ELEMENT_ARRAY xmlName:@"${xmlName}" propertyName:@"${field.name}" type:${type.name} clazz:[#if !type.primitive][${type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
-		[#else]
-	  [#if !flag]
-	     [#assign flag=true]
+	    [#else]
+	        [#if !flag]
+	            [#assign flag=true]
     PicoPropertySchema *ps = nil;
-	  [/#if]
+	        [/#if]
     ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ELEMENT xmlName:@"${xmlName}" propertyName:@"${field.name}" type:${field.type.name} clazz:[#if !field.type.primitive][${field.type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
-		[/#if]
+	    [/#if]
 	[#elseif field.value][#-- map to xml value --]
-	  [#if !flag]
-	     [#assign flag=true]
+	    [#if !flag]
+	        [#assign flag=true]
     PicoPropertySchema *ps = nil;
-	  [/#if]
+	    [/#if]
     ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_VALUE xmlName:nil propertyName:@"${field.name}" type:${field.type.name} clazz:[#if !field.type.primitive][${field.type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
     [#else][#-- map to xml any --]
-      [#if !flag]
-	     [#assign flag=true]
+        [#if !flag]
+	       [#assign flag=true]
     PicoPropertySchema *ps = nil;
-	  [/#if]
-	  [#if field.type.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
-	  [#assign type = field.type.typeParameters?first]
-	  [#else]
-	  [#assign type = field.type]
-	  [/#if]
+	    [/#if]
+	    [#if field.type.collection && (field.type.typeParameters)?? && field.type.typeParameters?size > 0]
+	        [#assign type = field.type.typeParameters?first]
+	    [#else]
+	        [#assign type = field.type]
+	    [/#if]
     ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ANYELEMENT xmlName:nil propertyName:@"${field.name}" type:${type.name} clazz:[#if !type.primitive][${type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
 	[/#if]                     
-    [/#list]
+[/#list]
     
     return map;
 }
