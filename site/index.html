@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MXJC - XSD to IOS Objective-C and Android Java binding compiler based on JAXB XJC.</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" media="all" href="stylesheets/reset.css" />
+    <link rel="stylesheet" media="all" href="stylesheets/main.css" />
+    <link rel="stylesheet" media="all" href="stylesheets/syntax.css" />
+    
+    <script type="text/javascript" src="javascripts/highlight.pack.js"></script>
+  </head>
+  
+  <body>
+    
+    <a class="forkme" href="https://github.com/bulldog2011/mxjc">
+      <img  src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub">
+    </a>
+    <div id="container">
+
+<h1>MXJC</h1>
+
+<p>XSD to IOS Objective-C and Android Java binding compiler based on JAXB XJC.</p>
+
+<h3>Feature Highlight</h3>
+
+<ol>
+<li><strong><em>Standard based</em></strong> : based on Oracle JAXB 2.1 XJC, recognize most standard XML Schema components.</li>
+<li><strong><em>Objective-c Pico Binding Support</em></strong> : auto-generate Pico for IOS bindable classes from XML Schema or WSDL.</li>
+<li><strong><em>Android Nano Binding Support</em></strong> : auto-generate <a href="https://github.com/bulldog2011/nano">Nano for Android</a> bindable classes from XML Schema or WSDL.</li>
+<li><strong><em>Doc Auto Generation</em></strong> : auto-generate code comments from XML Schema or WSDL annotations.</li>
+</ol>
+
+
+<h3>How to Use</h3>
+
+<p>Download latest zip package <a href="https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.1">here</a>, then extract the zip file.</p>
+
+<pre><code>Usage: mxjc [-options ...] &lt;schema file/URL/dir&gt; ... [-b &lt;bindinfo&gt;] ...
+If dir is specified, all schema files in it will be compiled.
+Options:
+  -nano              :  target Nano for Android as code generation target (default)
+  -pico              :  target Pico for IOS as code generation target
+  -prefix &lt;prefix&gt;   :  add prefix to the target classes, only for pico binding (recommended to avoid 
+                        possible name conflict)
+  -nv                :  do not perform strict validation of the input schema(s)
+  -b &lt;file/dir&gt;      :  specify external bindings files (each &lt;file&gt; must have its own -b)
+                        If a directory is given, **/*.xjb is searched
+  -d &lt;dir&gt;           :  generated files will go into this directory
+  -p &lt;pkg&gt;           :  specifies the target package
+  -httpproxy &lt;proxy&gt; :  set HTTP/HTTPS proxy. Format is [user[:password]@]proxyHost:proxyPort
+  -httpproxyfile &lt;f&gt; :  Works like -httpproxy but takes the argument in a file to protect password 
+  -readOnly          :  generated files will be in read-only mode
+  -xmlschema         :  treat input as W3C XML Schema (default)
+  -wsdl              :  treat input as WSDL and compile schemas inside it (experimental,unsupported)
+  -verbose           :  be extra verbose
+  -quiet             :  suppress compiler output
+  -help              :  display this help message
+  -version           :  display version information 
+</code></pre>
+
+<h3>Docs</h3>
+
+<ol>
+<li><a href="http://bulldog2011.github.com/blog/2013/02/07/schema-driven-nano-binding/">Scheam driven data binding with Nano and mxjc</a></li>
+<li><a href="http://bulldog2011.github.com/blog/2013/02/17/schema-driven-on-android-part-1-hello-ebay-finding/">Schema Driven Web Serivce Client Development on Android, Part 1 : Hello eBay Finding</a></li>
+<li><a href="http://bulldog2011.github.com/blog/2013/02/19/schema-driven-on-android-part-2-ebay-search/">Schema Driven Web Serivce Client Development on Android, Part 2 : eBay Search App</a></li>
+</ol>
+
+
+<h3>Current Limition</h3>
+
+<ol>
+<li>xsd:choice is not support and will be ignored if presents</li>
+<li>xsd nest anonymous type is only experimentally supported and is not recommended to use.</li>
+</ol>
+
+
+<h3>Copyright and License</h3>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2013 Leansoft Technology <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#53;&#x31;&#115;&#x74;&#x61;&#114;&#116;&#117;&#x70;&#64;&#115;&#x69;&#x6e;&#x61;&#46;&#x63;&#x6f;&#109;">&#53;&#x31;&#115;&#x74;&#97;&#x72;&#116;&#x75;&#x70;&#x40;&#115;&#x69;&#110;&#97;&#46;&#99;&#x6f;&#x6d;</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      
+      <div id="footer">
+        <p>Author: William Yang<br/>
+          <a href="https://github.com/bulldog2011">@github</a> &mdash;
+          <a href="http://bulldog2011.github.com/">Blog</a>  
+        </p>
+      </div>
+      <script type="text/javascript">
+        var codes = document.getElementsByTagName('code');
+        for (var i=0;i<codes.length;i++) {
+          if (codes[i].className.indexOf('lang-') === 0) {
+            codes[i].className = codes[i].className.slice('lang-'.length);
+          }
+
+          switch(codes[i].className) {
+            case 'js':
+              codes[i].className = 'javascript';
+              break;
+          }
+        }
+        hljs.initHighlightingOnLoad();
+    </script>
+    </div>
+  </body>
+</html>
