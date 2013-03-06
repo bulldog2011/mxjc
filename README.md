@@ -45,7 +45,7 @@ Options:
 3. [Schema Driven Web Serivce Client Development on Android, Part 2 : eBay Search App](http://bulldog2011.github.com/blog/2013/02/19/schema-driven-on-android-part-2-ebay-search/)
 
 
-###Current Limitaion
+###Current Limitation
 1. xsd:choice is not support and will be ignored if presents
 2. xsd nest anonymous type is only experimentally supported and is not recommended to use.
 

@@ -103,7 +103,7 @@ h3 {
 .forkme {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 1;
   -webkit-transition-property: opacity;
   -webkit-transition-duration: 0.2s;
