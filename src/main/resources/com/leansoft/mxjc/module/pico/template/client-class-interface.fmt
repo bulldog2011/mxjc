@@ -19,9 +19,6 @@
 [#list fieldClassImports as import]
 @class ${import};
 [/#list]
-[#if hasAny]
-@class GDataXMLElement;
-[/#if]
 
 /**
  ${clazz.docComment?default("(public class)")?replace("\n", "\n ")?replace("\t", "")}
@@ -35,14 +32,11 @@
 @private
 [#list clazz.fields as field]
 [#if field.type.collection]
-  [#if !field.any]
     NSMutableArray *_${field.name};
-  [#else]
-    [#assign type = field.type.typeParameters?first]
-    ${type.fullName} *_${field.name};
-  [/#if]
 [#elseif field.type.enum]
     NSString *_${field.name};
+[#elseif field.any]
+    NSMutableArray *_${field.name};
 [#else]
     ${field.type.fullName} *_${field.name};
 [/#if]
@@ -69,11 +63,8 @@
  entry type : class ${type.fullName}
  [/#if]
 */
-  [#if !field.any]
+
 @property (nonatomic, retain) NSMutableArray *${field.name};
-  [#else]
-@property (nonatomic, retain) ${type.fullName} *${field.name};
-  [/#if]
 [#elseif field.type.enum]
 /**
  ${field.docComment?default("(public property)")?replace("\n", "\n ")?replace("\t", "")}
@@ -81,6 +72,13 @@
  type: string constant in ${field.type.fullName}.h
 */
 @property (nonatomic, retain) NSString *${field.name};
+[#elseif field.any]
+/**
+ ${field.docComment?default("(public property)")?replace("\n", "\n ")?replace("\t", "")}
+ 
+ entry type : ${field.type.fullName}, wrapper for primitive ${getPrimitiveTypeName(field.type.name)}
+*/
+@property (nonatomic, retain) NSMutableArray *${field.name};
 [#else]
 /**
  ${field.docComment?default("(public property)")?replace("\n", "\n ")?replace("\t", "")}

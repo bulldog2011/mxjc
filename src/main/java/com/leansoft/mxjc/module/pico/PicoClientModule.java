@@ -20,8 +20,6 @@ import freemarker.template.SimpleHash;
 
 public class PicoClientModule extends AbstractClientModule {
 	
-	static final String ANY_IMPORT = "GDataXMLNode";
-	
 	// references to templates
 	private URL clzIntfTemplate;
 	private URL clzImplTempalte;
@@ -75,7 +73,6 @@ public class PicoClientModule extends AbstractClientModule {
 			fmModel.put("superClassImports", this.getSuperClassImports(classInfo));
 			fmModel.put("fieldClassImports", this.getFieldImports(classInfo));
 			fmModel.put("clazz", classInfo);
-			fmModel.put("hasAny", this.hasAny(classInfo)); // for GDataXML import
 			
 			String relativePath = ClassNameUtil.packageNameToPath(classInfo.getPackageName());
 			FileInfo classIntf = this.generateFile(clzIntfTemplate, fmModel, classInfo.getName(), "h", relativePath);
@@ -194,13 +191,6 @@ public class PicoClientModule extends AbstractClientModule {
 		}
 		
 		return imports;
-	}
-	
-	private boolean hasAny(ClassInfo clazz) {
-		for(FieldInfo field : clazz.getFields()) {
-			if (field.isAny()) return true;
-		}
-		return false;
 	}
 	
 	private void convertFieldsType(ClassInfo clazz) {

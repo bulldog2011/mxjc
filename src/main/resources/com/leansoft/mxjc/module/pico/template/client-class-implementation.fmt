@@ -8,9 +8,6 @@
 [#list fieldClassImports as import]
 #import "${import}.h"
 [/#list]
-[#if hasAny]
-#import "GDataXMLNode.h
-[/#if]
 
 @implementation ${clazz.name}
 
@@ -89,7 +86,7 @@
 	    [#else]
 	        [#assign type = field.type]
 	    [/#if]
-    ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ANYELEMENT xmlName:nil propertyName:@"${field.name}" type:${type.name} clazz:[#if !type.primitive][${type.fullName} class][#else]nil[/#if]];
+    ps = [[PicoPropertySchema alloc] initWithKind:PICO_KIND_ANY_ELEMENT xmlName:@"${xmlName}" propertyName:@"${field.name}" type:${type.name} clazz:[#if !type.primitive][${type.fullName} class][#else]nil[/#if]];
     [map setObject:ps forKey:@"${field.name}"];
     [ps release];
 	[/#if]                     
