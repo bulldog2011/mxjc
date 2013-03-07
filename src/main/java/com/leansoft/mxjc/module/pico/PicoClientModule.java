@@ -236,7 +236,7 @@ public class PicoClientModule extends AbstractClientModule {
 			throw new XjcModuleException("Fail to load required template file : "
 					+ template);
 		}
-		debug("NanoClientModule get template : " + url.toString());
+		debug("PicoClientModule get template : " + url.toString());
 		return url;
 	}
 
