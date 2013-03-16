@@ -1,5 +1,6 @@
 package com.leansoft.mxjc.module.pico;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +67,8 @@ public class PicoClientModule extends AbstractClientModule {
 		
 		fmModel.put("group", config.picoServiceGroup);
 		
+		
+		String relativePath = null;
 		// generate classes
 		info("Generating classes ...");
 		for(ClassInfo classInfo : cgModel.getClasses()) {
@@ -74,7 +77,7 @@ public class PicoClientModule extends AbstractClientModule {
 			fmModel.put("fieldClassImports", this.getFieldImports(classInfo));
 			fmModel.put("clazz", classInfo);
 			
-			String relativePath = ClassNameUtil.packageNameToPath(classInfo.getPackageName());
+			relativePath = ClassNameUtil.packageNameToPath(classInfo.getPackageName());
 			FileInfo classIntf = this.generateFile(clzIntfTemplate, fmModel, classInfo.getName(), "h", relativePath);
 			targetFileSet.add(classIntf);
 			FileInfo classImpl = this.generateFile(clzImplTempalte, fmModel, classInfo.getName(), "m", relativePath);
@@ -85,7 +88,7 @@ public class PicoClientModule extends AbstractClientModule {
 		info("Generating enums ...");
 		for(EnumInfo enumInfo : cgModel.getEnums()) {
 			fmModel.put("enum", enumInfo);
-			String relativePath = ClassNameUtil.packageNameToPath(enumInfo.getPackageName());
+			relativePath = ClassNameUtil.packageNameToPath(enumInfo.getPackageName());
 			FileInfo enumDec = this.generateFile(enumDeclarationTemplate, fmModel, enumInfo.getName(), "h", relativePath);
 			targetFileSet.add(enumDec);
 			FileInfo enumDef = this.generateFile(enumDefinitionTemplate, fmModel, enumInfo.getName(), "m", relativePath);
@@ -96,8 +99,13 @@ public class PicoClientModule extends AbstractClientModule {
 		info("Generating common header ...");
 		fmModel.put("classes", cgModel.getClasses());
 		fmModel.put("enums", cgModel.getEnums());
+		
+		if (relativePath == null) {
+			relativePath = "";
+		}
+		relativePath += File.separator + "common";
 		String commonTypeFileName = prefix + "CommonTypes";
-		FileInfo commonHeader = this.generateFile(commonHeaderTemplate, fmModel, commonTypeFileName, "h", "");
+		FileInfo commonHeader = this.generateFile(commonHeaderTemplate, fmModel, commonTypeFileName, "h", relativePath);
 		targetFileSet.add(commonHeader);
 		
 		return targetFileSet;
