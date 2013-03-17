@@ -11,5 +11,9 @@ public class CGConfig {
 	public String picoPrefix;
 	
 	public String picoServiceGroup;
+	
+	public boolean eBaySOAService;
+	
+	public boolean eBayShoppingAPI;
 
 }
