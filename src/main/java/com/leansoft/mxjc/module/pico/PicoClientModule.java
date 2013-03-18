@@ -133,6 +133,7 @@ public class PicoClientModule extends AbstractClientModule {
 				TypeInfo superType = classInfo.getSuperClass();
 				this.prefixType(superType, prefix);
 			}
+			
 			// update field reference
 			for(FieldInfo field : classInfo.getFields()) {
 				TypeInfo fieldType = field.getType();

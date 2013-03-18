@@ -96,13 +96,13 @@ public class ClassModelBuilder {
 				JType rawType = fo.getRawType();
 				typeInfo.setName(rawType.name());
 				
-				pkgName = ClassNameUtil.getPackageName(rawType.fullName());
+//				pkgName = ClassNameUtil.getPackageName(rawType.fullName());
 				// for anonymous inner class, we need to change package name to lower case
 				if (isNestClass(rawType)) {
 					typeInfo.setNestClass(true);
 				}
-				String typeName = ClassNameUtil.stripQualifier(rawType.fullName());
-				typeInfo.setFullName(pkgName + "." + typeName);
+//				String typeName = ClassNameUtil.stripQualifier(rawType.fullName());
+				typeInfo.setFullName(rawType.fullName());
 				typeInfo.setPrimitive(rawType.isPrimitive());
 				
 				if (isEnum(rawType)) {
@@ -119,13 +119,13 @@ public class ClassModelBuilder {
 					TypeInfo elementTypeInfo = new TypeInfo();
 					elementTypeInfo.setName(elementType.name());
 					
-					pkgName = ClassNameUtil.getPackageName(elementType.fullName());
+//					pkgName = ClassNameUtil.getPackageName(elementType.fullName());
 					// for anonymous inner class, we need to change package name to lower case
 					if (isNestClass(elementType)) {
 						elementTypeInfo.setNestClass(true);	
 					}
-					typeName = ClassNameUtil.stripQualifier(elementType.fullName());
-					elementTypeInfo.setFullName(pkgName + "." + typeName);
+//					typeName = ClassNameUtil.stripQualifier(elementType.fullName());
+					elementTypeInfo.setFullName(elementType.fullName());
 					elementTypeInfo.setPrimitive(elementType.isPrimitive());
 					if (isEnum(elementType)) {
 						elementTypeInfo.setEnum(true);
@@ -139,13 +139,13 @@ public class ClassModelBuilder {
 						TypeInfo typeParamInfo = new TypeInfo();
 						typeParamInfo.setName(typeParamClass.name());
 						
-						pkgName = ClassNameUtil.getPackageName(typeParamClass.fullName());
+//						pkgName = ClassNameUtil.getPackageName(typeParamClass.fullName());
 						// for anonymous inner class, we need to change package name to lower case
 						if (isNestClass(typeParamClass)) {
 							typeParamInfo.setNestClass(true);	
 						}
-						typeName = ClassNameUtil.stripQualifier(typeParamClass.fullName());
-						typeParamInfo.setFullName(pkgName + "." + typeName);
+//						typeName = ClassNameUtil.stripQualifier(typeParamClass.fullName());
+						typeParamInfo.setFullName(typeParamClass.fullName());
 						typeParamInfo.setPrimitive(typeParamClass.isPrimitive());
 						if (isEnum(typeParamClass)) {
 							typeParamInfo.setEnum(true);
