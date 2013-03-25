@@ -19,8 +19,7 @@
 // note: this method is only for internal use, DO NOT CHANGE!
 +(PicoClassSchema *)getClassMetaData {
 [#if clazz.rootElementAnnotation?? && clazz.rootElementAnnotation.parameterProvided]
-    PicoClassSchema *cs = nil;
-    [[PicoClassSchema alloc] initWithXmlName:@"${clazz.rootElementAnnotation.name}" nsUri:@"${clazz.rootElementAnnotation.namespace}"];
+    PicoClassSchema *cs = [[PicoClassSchema alloc] initWithXmlName:@"${clazz.rootElementAnnotation.name}" nsUri:@"${clazz.rootElementAnnotation.namespace}"];
     [cs autorelease];
     return cs;
 [#else]

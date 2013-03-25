@@ -3,7 +3,6 @@ package com.leansoft.mxjc.module;
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
-import org.xml.sax.Locator;
 import org.xml.sax.helpers.LocatorImpl;
 
 import com.leansoft.mxjc.model.FileInfo;

@@ -352,7 +352,6 @@ public class Driver {
                     // use specific client module to generate code
                     Set<FileInfo> files;
                     try {
-                        // TODO, try one first
                         ClientModule clientModule = ModuleFactory.getModule(opt.module);
                         clientModule.setErrorReceiver(receiver);// enable reporting
                         clientModule.init();

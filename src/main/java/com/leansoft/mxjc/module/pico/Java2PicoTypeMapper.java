@@ -149,7 +149,7 @@ public class Java2PicoTypeMapper {
 	 * @param javaType
 	 * @return
 	 */
-	public static String lookupPicoType(String javaType) {
+	public static String lookupPicoType(String javaType) {		
 		if (languageMap.containsKey(javaType)) {
 			return languageMap.get(javaType);			
 		}
