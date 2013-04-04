@@ -358,6 +358,7 @@ public class Driver {
                         
                         CGConfig cgConfig = new CGConfig();
                         cgConfig.picoPrefix = opt.prefix;
+                        cgConfig.nanoPrivateField = opt.privateField;
 						files = clientModule.generate(cgModel, cgConfig);
 					} catch (XjcModuleException e1) {
 						receiver.error(e1);
@@ -467,7 +468,9 @@ public class Driver {
         
         public ModuleName module = ModuleName.NANO;
         
-        public String prefix;
+        public String prefix; // for pico
+        
+        public boolean privateField; // for nano
                
         /** Parse XJC-specific options. */
         public int parseArgument(String[] args, int i) throws BadCommandLineException {
@@ -501,6 +504,11 @@ public class Driver {
             
             if (args[i].equals("-pico")) {
             	module = ModuleName.PICO;
+            	return 1;
+            }
+            
+            if (args[i].equals("-privateField")) {
+            	this.privateField = true;
             	return 1;
             }
             

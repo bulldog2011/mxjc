@@ -76,6 +76,8 @@ public class NanoClientModule extends AbstractClientModule {
 		// adjust package name of nested class
 		adjustPackageNameOfNestClass(cgModel.getClasses());
 		
+		fmModel.put("config", config);
+		
 		// generate classes
 		info("Generating classes ...");
 		for(ClassInfo classInfo : cgModel.getClasses()) {
