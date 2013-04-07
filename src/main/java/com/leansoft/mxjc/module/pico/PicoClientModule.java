@@ -27,6 +27,7 @@ public class PicoClientModule extends AbstractClientModule {
 	private URL enumDeclarationTemplate;
 	private URL enumDefinitionTemplate;
 	private URL commonHeaderTemplate;
+        private boolean useARC = false;
 	
 	@Override
 	public ModuleName getName() {
@@ -240,7 +241,12 @@ public class PicoClientModule extends AbstractClientModule {
 
 	@Override
 	protected URL getTemplateURL(String template) throws XjcModuleException {
-		URL url = PicoClientModule.class.getResource("template/" + template);
+                URL url = PicoClientModule.class.getResource("template/" + template);
+                if(useARC){
+                    debug("Using ARC templates.");
+                    url = PicoClientModule.class.getResource("arc/template/" + template);
+                }
+		
 		if (url == null) {
 			throw new XjcModuleException("Fail to load required template file : "
 					+ template);
@@ -248,6 +254,21 @@ public class PicoClientModule extends AbstractClientModule {
 		debug("PicoClientModule get template : " + url.toString());
 		return url;
 	}
+
+    /**
+     * @return the useARC
+     */
+    public boolean shouldUseARC() {
+        return useARC;
+    }
+
+    /**
+     * @param useARC the useARC to set
+     */
+    public PicoClientModule setUseARC(boolean useARC) {
+        this.useARC = useARC;
+        return this;
+    }
 
 
 }
