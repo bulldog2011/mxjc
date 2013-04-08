@@ -22,4 +22,16 @@ public class CGConfig {
 	public boolean isNanoPrivateField() {
 		return nanoPrivateField;
 	}
+	
+	public boolean isEBaySOAService() {
+		return eBaySOAService;
+	}
+	
+	public boolean isEBayShoppingAPI() {
+		return eBayShoppingAPI;
+	}
+	
+	public boolean isEBayTradingAPI() {
+		return eBayTradingAPI;
+	}
 }
