@@ -46,8 +46,10 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	@AnyElement
 	[/#if]  
 	[#if config.nanoPrivateField]
+	@Order(value=${field_index})
 	private ${field.type.name} ${field.name};
 	[#else]
+	@Order(value=${field_index})
 	public ${field.type.name} ${field.name};	
 	[/#if]
 	
