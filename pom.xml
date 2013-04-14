@@ -3,7 +3,7 @@
 
   <groupId>com.leansoft</groupId>
   <artifactId>mxjc</artifactId>
-  <version>0.6.1</version>
+  <version>0.6.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>mxjc</name>
@@ -14,7 +14,7 @@
         <connection>scm:git:git@github.com:bulldog2011/mxjc.git</connection>
         <developerConnection>scm:git:git@github.com:bulldog2011/mxjc.git</developerConnection>
         <url>https://github.com/bulldog2011/mxjc</url>
-    <tag>mxjc-0.6.1</tag>
+    <tag>mxjc-0.6.0</tag>
   </scm>
     <licenses>
         <license>
