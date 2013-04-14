@@ -13,7 +13,7 @@ XSD to IOS Objective-C and Android Java binding compiler based on JAXB XJC.
 
 ##How to Use
 
-Download zip package from repository mentioned in version history below, latest stable release is [0.6.0](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.0), then extract the zip file and run mxjc script in command line:
+Download zip package from repository mentioned in version history below, latest stable release is [0.6.1](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.1), then extract the zip file and run mxjc script in command line:
 
 	
 	Usage: mxjc [-options ...] <schema file/URL/dir> ... [-b <bindinfo>] ...
