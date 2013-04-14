@@ -28,7 +28,6 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
     private static final long serialVersionUID = -1L;
 
     [#list clazz.fields as field]
-	[#if !field.any]  
 	[#if field.attribute][#-- map to xml attribute --]
 	  [#if field.attributeAnnotation?? && field.attributeAnnotation.parameterProvided]
 	@${field.attributeAnnotation}
@@ -43,14 +42,21 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	  [/#if]
 	[#elseif field.value][#-- map to xml value --]
 	@Value
+	[#elseif field.any][#-- map to xml any element --]
+	@AnyElement
 	[/#if]  
+	[#if config.nanoPrivateField]
+	@Order(value=${field_index})
 	private ${field.type.name} ${field.name};
+	[#else]
+	@Order(value=${field_index})
+	public ${field.type.name} ${field.name};	
 	[/#if]
 	
     [/#list]
     
-    [#list clazz.fields as field]
-    [#if !field.any]  
+    [#if config.nanoPrivateField]
+    [#list clazz.fields as field]  
     [#if field.docComment??]
 	/**
      * public getter
@@ -88,7 +94,6 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	public void set${field.name?cap_first}(${field.type.name} ${field.name}) {
 	    this.${field.name} = ${field.name};
 	}
-	[/#if]
 	[/#list]
-
+    [/#if]
 }
