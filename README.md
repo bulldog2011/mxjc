@@ -15,40 +15,49 @@ XSD to IOS Objective-C and Android Java binding compiler based on JAXB XJC.
 
 Download zip package from repository mentioned in version history below, latest stable release is [0.6.0](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.0), then extract the zip file and run mxjc script in command line:
 
-
+	
 	Usage: mxjc [-options ...] <schema file/URL/dir> ... [-b <bindinfo>] ...
 	If dir is specified, all schema files in it will be compiled.
 	Options:
 	  -nano              :  target Nano for Android as code generation target (default)
+	  -privateField      :  generate private fields, accessed by public accessors, only for nano binding
 	  -pico              :  target Pico for IOS as code generation target
-	  -prefix <prefix>   :  add prefix to the target classes, only for pico binding (recommended to avoid 
-	                        possible name conflict)
+	  -prefix <prefix>   :  add prefix to the target classes, only for pico binding
+	                        (recommended to avoid possible name conflict)
 	  -nv                :  do not perform strict validation of the input schema(s)
 	  -b <file/dir>      :  specify external bindings files (each <file> must have its own -b)
 	                        If a directory is given, **/*.xjb is searched
 	  -d <dir>           :  generated files will go into this directory
 	  -p <pkg>           :  specifies the target package
 	  -httpproxy <proxy> :  set HTTP/HTTPS proxy. Format is [user[:password]@]proxyHost:proxyPort
-	  -httpproxyfile <f> :  Works like -httpproxy but takes the argument in a file to protect password 
+	  -httpproxyfile <f> :  Works like -httpproxy but takes the argument in a file to protect password
 	  -readOnly          :  generated files will be in read-only mode
 	  -xmlschema         :  treat input as W3C XML Schema (default)
 	  -wsdl              :  treat input as WSDL and compile schemas inside it (experimental,unsupported)
 	  -verbose           :  be extra verbose
 	  -quiet             :  suppress compiler output
 	  -help              :  display this help message
-	  -version           :  display version information 
+	  -version           :  display version information
 
 
 
 ## Version History
 
+#### 0.6.1 — *April 14, 2013* : [repository](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.1)
+  * This version is compatible with [Nano 0.7.0](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/nano/0.7.0) and [Pico 0.5.0](https://github.com/bulldog2011/pico/tree/v0.5.0)
+  * Enhancement: support generating public fields(default) for Nano
+  * Enhancement: support generating ordered fields for Nano
+  * Enhancement: support generating XSD any element for Nano
+
 #### 0.6.0 — *March 25, 2013* : [repository](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.0)
-  * Feature: support Pico binding for IOS
-  * Enhancement: support XSD any element
+  * This version is compatible with [Nano 0.6.3](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/nano/0.6.3) and [Pico 0.5.0](https://github.com/bulldog2011/pico/tree/v0.5.0)
+  * Feature: support Pico binding for IOS 0.5.0
+  * Enhancement: support generating XSD any element for Pico 0.5.0
 
 #### 0.5.1 — *February 5, 2013* : [repository](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.5.1)
 
-  * Initial version:)
+  * Initial version supporting Nano binding for Android.
+  * This version is compatible with [Nano 0.6.3](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/nano/0.6.3)
 
 
 ##Docs

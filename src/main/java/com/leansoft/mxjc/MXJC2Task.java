@@ -67,6 +67,7 @@ public class MXJC2Task extends Task {
     // mxjc specific options
     private ModuleName moduleName = ModuleName.NANO; // default to nano binding
     private String prefix;
+    private boolean privateField;
     
     /** User-specified stack size. */
     private long stackSize = -1;
@@ -186,6 +187,15 @@ public class MXJC2Task extends Task {
      */
     public void setPrefix(String prefix) {
     	this.prefix = prefix;
+    }
+    
+    /**
+     * use private fields, fields are accessed by public accessor, only for nano binding
+     * 
+     * @param privateField
+     */
+    public void setPrivateFiled(boolean privateField) {
+    	this.privateField = privateField;
     }
     
     /**
@@ -526,6 +536,7 @@ public class MXJC2Task extends Task {
                 
                 CGConfig cgConfig = new CGConfig();
                 cgConfig.picoPrefix = this.prefix;
+                cgConfig.nanoPrivateField = this.privateField;
 				files = clientModule.generate(cgModel, cgConfig);
 			} catch (XjcModuleException e1) {
 				throw new BuildException("failed to generate target module code", e1);
