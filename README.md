@@ -46,7 +46,7 @@ Download zip package from repository mentioned in version history below, latest 
 #### 0.6.1 — *April 14, 2013* : [repository](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.1)
   * This version is compatible with [Nano 0.7.0](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/nano/0.7.0) and [Pico 0.5.0](https://github.com/bulldog2011/pico/tree/v0.5.0)
   * Enhancement: support generating public fields(default) for Nano
-  * Enhancement: support generating ordered fields for Nano
+  * Enhancement: support generating fields ordering for Nano
   * Enhancement: support generating XSD any element for Nano
 
 #### 0.6.0 — *March 25, 2013* : [repository](https://github.com/bulldog2011/bulldog-repo/tree/master/repo/releases/com/leansoft/mxjc/0.6.0)
