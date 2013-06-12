@@ -16,7 +16,7 @@ import ${import};
  */
 [/#if]
 [#if clazz.rootElementAnnotation?? && clazz.rootElementAnnotation.parameterProvided]
-@${clazz.rootElementAnnotation}
+@com.leansoft.nano.annotation.${clazz.rootElementAnnotation}
 [/#if]
 [#--
 [#if clazz.xmlTypeAnnotation?? && clazz.xmlTypeAnnotation.parameterProvided]
@@ -36,9 +36,9 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	  [/#if]
 	[#elseif field.element][#-- map to xml element --]
 	  [#if field.elementAnnotation?? && field.elementAnnotation.parameterProvided]
-	@${field.elementAnnotation}
+	@com.leansoft.nano.annotation.${field.elementAnnotation}
 	  [#else]
-	@Element
+	@com.leansoft.nano.annotation.Element
 	  [/#if]
 	[#elseif field.value][#-- map to xml value --]
 	@Value
