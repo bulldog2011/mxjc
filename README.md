@@ -65,6 +65,9 @@ Download zip package from repository mentioned in version history below, latest 
 2. [Schema Driven Web Serivce Client Development on Android, Part 1 : Hello eBay Finding](http://bulldog2011.github.com/blog/2013/02/17/schema-driven-on-android-part-1-hello-ebay-finding/)
 3. [Schema Driven Web Serivce Client Development on Android, Part 2 : eBay Search App](http://bulldog2011.github.com/blog/2013/02/19/schema-driven-on-android-part-2-ebay-search/)
 
+##Faq
+[Link to Faq on Wiki](https://github.com/bulldog2011/mxjc/wiki/FAQ)
+
 
 ##Current Limitation
 1. xsd:choice is not supported and will be ignored if presents
