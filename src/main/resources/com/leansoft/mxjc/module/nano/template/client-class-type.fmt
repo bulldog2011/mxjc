@@ -10,6 +10,9 @@ import com.leansoft.nano.annotation.*;
 import ${import};
 [/#list]
 
+[#-- avoid conflict with nano Element annotation --]
+[#assign has_w3c_dom_element = imports?seq_contains("org.w3c.dom.Element")]
+
 [#if clazz.docComment??]
 /**
  * ${clazz.docComment?replace("\n", "\n * ")?replace("\t", "")}
@@ -36,9 +39,17 @@ public [#if clazz.abstract]abstract [/#if]class ${clazz.name} [#if clazz.superCl
 	  [/#if]
 	[#elseif field.element][#-- map to xml element --]
 	  [#if field.elementAnnotation?? && field.elementAnnotation.parameterProvided]
+	    [#if has_w3c_dom_element]
 	@com.leansoft.nano.annotation.${field.elementAnnotation}
+	    [#else]
+	@${field.elementAnnotation}    
+	    [/#if]
 	  [#else]
+	    [#if has_w3c_dom_element]
 	@com.leansoft.nano.annotation.Element
+	    [#else]
+	@Element    
+	    [/#if]
 	  [/#if]
 	[#elseif field.value][#-- map to xml value --]
 	@Value
