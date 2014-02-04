@@ -11,6 +11,8 @@ public class ModuleFactory {
 			module = new NanoClientModule();
 		} else if (name == ModuleName.PICO) {
 			module = new PicoClientModule();
+		}else if (name == ModuleName.PICOARC) {
+                        module = new PicoClientModule().setUseARC(true);
 		}
 		return module;
 	}

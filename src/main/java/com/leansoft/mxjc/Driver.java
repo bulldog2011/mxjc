@@ -506,6 +506,10 @@ public class Driver {
             	module = ModuleName.PICO;
             	return 1;
             }
+            if (args[i].equals("-picoarc")) {
+            	module = ModuleName.PICOARC;
+            	return 1;
+            }
             
             if (args[i].equals("-privateField")) {
             	this.privateField = true;
